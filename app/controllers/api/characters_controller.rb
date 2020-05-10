@@ -11,9 +11,35 @@ class Api::CharactersController < ApplicationController
   end
 
   def create
+    @character = Character.new({
+      user_id: params[:user_id],
+      name: params[:name],
+      level: params[:level],
+      character_class_id: params[:character_class_id],
+      speciality: params[:speciality],
+    })
+
+    if @character.save
+      render "show.json.jb"
+    else
+      render "error.json.jb"
+      # render json: { errors: @character.errors.full_message }, status: :unprocessable_entity
+    end
   end
 
   def update
+    @character = Character.find_by(id: params[:id])
+    @character.name = params[:name] || @character.name
+    @character.level = params[:level] || @character.level
+    @character.character_class_id = params[:character_class_id] || @character.character_class_id
+    @character.speciality = params[:speciality] || @character.speciality
+
+    if @character.save
+      render "show.json.jb"
+    else
+      render "error.json.jb"
+      # render json: { errors: @character.errors.full_message }, status: :unprocessable_entity
+    end
   end
 
   def destroy
