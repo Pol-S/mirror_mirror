@@ -1,0 +1,19 @@
+{
+  id: character.id,
+  user_id: character.user_id,
+  user: character.user.name,
+  name: character.name,
+  level: character.level,
+  character_class_id: character.character_class_id,
+  character_class: character.character_class.character_class,
+  speciality: character.speciality,
+  nuke_score: character.nuke_score,
+  cc_score: character.cc_score,
+  utility_score: character.utility_score,
+  face_score: character.face_score,
+  spells: character.spells.map do |character_spell|
+    {
+      spell: character_spell.name,
+    }
+  end,
+}
