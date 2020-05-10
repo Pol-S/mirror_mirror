@@ -5,6 +5,9 @@ class Api::CharactersController < ApplicationController
   end
 
   def show
+    id = params["id"]
+    @character = Character.find_by(id: params[:id])
+    render "show.json.jb"
   end
 
   def create
