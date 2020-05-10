@@ -47,4 +47,8 @@ class Api::CharactersController < ApplicationController
     character.destroy
     render json: { message: "Character failed death save." }
   end
+
+  def add_spell(spell_id, character_id)
+    @newcharacterspell = CharacterSpell.new({ spell_id: spell_id, character_id: character_id })
+  end
 end
