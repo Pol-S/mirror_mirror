@@ -22,7 +22,7 @@ class Api::CharactersController < ApplicationController
     if @character.save
       render "show.json.jb"
     else
-      render "error.json.jb"
+      render json: { message: "Character not saved" }
       # render json: { errors: @character.errors.full_message }, status: :unprocessable_entity
     end
   end
@@ -37,11 +37,14 @@ class Api::CharactersController < ApplicationController
     if @character.save
       render "show.json.jb"
     else
-      render "error.json.jb"
+      render json: { message: "Character not saved" }
       # render json: { errors: @character.errors.full_message }, status: :unprocessable_entity
     end
   end
 
   def destroy
+    character = Character.find_by(id: params[:id])
+    character.destroy
+    render json: { message: "Character failed death save." }
   end
 end
