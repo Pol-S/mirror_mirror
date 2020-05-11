@@ -33,6 +33,7 @@ class Api::CharactersController < ApplicationController
     @character.level = params[:level] || @character.level
     @character.character_class_id = params[:character_class_id] || @character.character_class_id
     @character.speciality = params[:speciality] || @character.speciality
+    @character.add_spell(params[:new_spell_id])
 
     if @character.save
       render "show.json.jb"
@@ -46,9 +47,5 @@ class Api::CharactersController < ApplicationController
     character = Character.find_by(id: params[:id])
     character.destroy
     render json: { message: "Character failed death save." }
-  end
-
-  def add_spell(spell_id, character_id)
-    @newcharacterspell = CharacterSpell.new({ spell_id: spell_id, character_id: character_id })
   end
 end
