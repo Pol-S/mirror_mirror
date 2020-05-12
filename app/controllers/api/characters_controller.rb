@@ -20,6 +20,7 @@ class Api::CharactersController < ApplicationController
     })
 
     if @character.save
+      @character.add_spell(params[:new_spell_id])
       render "show.json.jb"
     else
       render json: { message: "Character not saved" }
