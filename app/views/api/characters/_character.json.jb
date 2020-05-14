@@ -7,10 +7,10 @@
   character_class_id: character.character_class_id,
   character_class: character.character_class.character_class,
   speciality: character.speciality,
-  nuke_score: character.nuke_calc,
-  cc_score: character.cc_calc,
-  utility_score: character.utility_calc,
-  face_score: character.face_calc,
+  nuke_score: character.nuke_score,
+  cc_score: character.cc_score,
+  utility_score: character.utility_score,
+  face_score: character.face_score,
 
   spells: character.spells.map do |character_spell|
     {

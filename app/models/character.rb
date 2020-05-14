@@ -6,9 +6,8 @@ class Character < ApplicationRecord
 
   def add_spell(spell_id)
     @newcharacterspell = CharacterSpell.new({ spell_id: spell_id, character_id: id })
-    class_compliant = false
 
-    if CharacterClassSpell.where(character_class_id: id, spell_id: spell_id).first
+    if CharacterClassSpell.where(character_class_id: character_class_id, spell_id: spell_id).first
       @newcharacterspell.save
     else
       "spell not saved"
