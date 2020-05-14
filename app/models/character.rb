@@ -8,11 +8,14 @@ class Character < ApplicationRecord
     @newcharacterspell = CharacterSpell.new({ spell_id: spell_id, character_id: id })
     class_compliant = false
 
-    if CharacterClassSpell.where(character_class_id: id, spell_id: spell_id)
-      #character class id equals spell id on th character class spell table
+    if CharacterClassSpell.where(character_class_id: id, spell_id: spell_id).first
       @newcharacterspell.save
     else
-      render json: { message: "Spell not saved" }
+      "spell not saved"
     end
+  end
+
+  #calculate characer
+  def score_calc
   end
 end
