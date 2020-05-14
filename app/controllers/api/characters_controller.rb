@@ -7,6 +7,7 @@ class Api::CharactersController < ApplicationController
   def show
     id = params["id"]
     @character = Character.find_by(id: params[:id])
+    @character.nuke_calc
     render "show.json.jb"
   end
 

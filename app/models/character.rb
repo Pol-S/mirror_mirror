@@ -15,7 +15,44 @@ class Character < ApplicationRecord
     end
   end
 
-  #calculate characer
-  def score_calc
+  #calculate characer nuke spell scores
+  def nuke_calc
+    if spells.length > 0
+      score = spells.reduce(0) do |rating, spell|
+        rating += spell[:nuker_score]
+      end
+    else
+      score = 0
+    end
+  end
+
+  def cc_calc
+    if spells.length > 0
+      score = spells.reduce(0) do |rating, spell|
+        rating += spell[:cc_score]
+      end
+    else
+      score = 0
+    end
+  end
+
+  def utility_calc
+    if spells.length > 0
+      score = spells.reduce(0) do |rating, spell|
+        rating += spell[:utility_score]
+      end
+    else
+      score = 0
+    end
+  end
+
+  def face_calc
+    if spells.length > 0
+      score = spells.reduce(0) do |rating, spell|
+        rating += spell[:face_score]
+      end
+    else
+      score = 0
+    end
   end
 end
