@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get "/characters/:id" => "characters#show"
     post "/characters" => "characters#create"
     patch "/characters/:id" => "characters#update"
+    patch "/characters/:id/:spell_id" => "characters#add_spell"
     delete "/characters/:id" => "characters#destroy"
+    delete "characters/:id/:spell_id" => "characters#destroy_spell"
   end
 end

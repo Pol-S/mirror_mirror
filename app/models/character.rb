@@ -14,6 +14,11 @@ class Character < ApplicationRecord
     end
   end
 
+  def destroy_spell(spell_id)
+    @removedcharacterspell = CharacterSpell.find_by({ spell_id: spell_id, character_id: id })
+    @removedcharacterspell.destroy
+  end
+
   #calculate characer nuke spell scores
   def nuke_calc
     if spells.length > 0
