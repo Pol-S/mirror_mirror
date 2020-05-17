@@ -41,12 +41,13 @@ class Api::CharactersController < ApplicationController
     @character.character_class_id = params[:character_class_id] || @character.character_class_id
     @character.speciality = params[:speciality] || @character.speciality
     @character.add_spell(params[:new_spell_id])
-    @character.nuke_score = @character.nuke_calc
-    @character.cc_score = @character.cc_calc
-    @character.utility_score = @character.utility_calc
-    @character.face_score = @character.face_calc
+    # @character.nuke_score = @character.nuke_calc
+    # @character.cc_score = @character.cc_calc
+    # @character.utility_score = @character.utility_calc
+    # @character.face_score = @character.face_calc
 
     if @character.save
+      @character.score_calc
       render "show.json.jb"
     else
       render json: { message: "Character not saved" }
@@ -57,5 +58,25 @@ class Api::CharactersController < ApplicationController
     character = Character.find_by(id: params[:id])
     character.destroy
     render json: { message: "Character failed death save." }
+  end
+
+  def add_spell
+    @character = Character.find_by(id: params[:id])
+    if @character.add_spell(params[:spell_id])
+      @character.score_calc
+      render "show.json.jb"
+    else
+      render json: { message: "Spell not added" }
+    end
+  end
+
+  def destroy_spell
+    @character = Character.find_by(id: params[:id])
+    if @character.destroy_spell(params[:spell_id])
+      @character.score_calc
+      render "show.json.jb"
+    else
+      render json: { message: "Spell not destroyed!" }
+    end
   end
 end

@@ -16,6 +16,7 @@
     {
       spell: character_spell.name,
       description: character_spell.description,
+      id: character_spell.id,
 
     }
   end,

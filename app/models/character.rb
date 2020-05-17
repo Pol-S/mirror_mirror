@@ -7,19 +7,34 @@ class Character < ApplicationRecord
   def add_spell(spell_id)
     @newcharacterspell = CharacterSpell.new({ spell_id: spell_id, character_id: id })
 
-    if CharacterClassSpell.where(character_class_id: character_class_id, spell_id: spell_id).first
+    if CharacterClassSpell.where(character_class_id: character_class_id, spell_id: spell_id).first && !CharacterSpell.where(character_id: id, spell_id: spell_id).first
       @newcharacterspell.save
+      "Spell added!"
     else
-      "spell not saved"
+      false
     end
   end
 
   def destroy_spell(spell_id)
     @removedcharacterspell = CharacterSpell.find_by({ spell_id: spell_id, character_id: id })
-    @removedcharacterspell.destroy
+    if @removedcharacterspell.destroy
+      "spell successfully removed"
+    else
+      false
+    end
   end
 
-  #calculate characer nuke spell scores
+  #calculate all spell scores.
+  def score_calc
+    @character = Character.find_by(id: id)
+    @character.nuke_score = @character.nuke_calc
+    @character.cc_score = @character.cc_calc
+    @character.utility_score = @character.utility_calc
+    @character.face_score = @character.face_calc
+    @character.save
+  end
+
+  #calculate various characer spell scores
   def nuke_calc
     if spells.length > 0
       score = spells.reduce(0) do |rating, spell|
