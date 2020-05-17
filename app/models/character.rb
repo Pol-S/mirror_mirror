@@ -26,12 +26,10 @@ class Character < ApplicationRecord
 
   #calculate all spell scores.
   def score_calc
-    @character = Character.find_by(id: id)
-    @character.nuke_score = @character.nuke_calc
-    @character.cc_score = @character.cc_calc
-    @character.utility_score = @character.utility_calc
-    @character.face_score = @character.face_calc
-    @character.save
+    nuke_score = nuke_calc
+    cc_score = cc_calc
+    utlity_score = utility_calc
+    face_score = face_calc
   end
 
   #calculate various characer spell scores
