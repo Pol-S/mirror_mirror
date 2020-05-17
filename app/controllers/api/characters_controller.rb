@@ -65,7 +65,10 @@ class Api::CharactersController < ApplicationController
   def add_spell
     @character = Character.find_by(id: params[:id])
     if @character.add_spell(params[:spell_id])
-      @character.score_calc
+      @character.nuke_score = @character.nuke_calc
+      @character.cc_score = @character.cc_calc
+      @character.utility_score = @character.utility_calc
+      @character.face_score = @character.face_calc
       render "show.json.jb"
     else
       render json: { message: "Spell not added" }
@@ -75,7 +78,10 @@ class Api::CharactersController < ApplicationController
   def destroy_spell
     @character = Character.find_by(id: params[:id])
     if @character.destroy_spell(params[:spell_id])
-      @character.score_calc
+      @character.nuke_score = @character.nuke_calc
+      @character.cc_score = @character.cc_calc
+      @character.utility_score = @character.utility_calc
+      @character.face_score = @character.face_calc
       render "show.json.jb"
     else
       render json: { message: "Spell not destroyed!" }

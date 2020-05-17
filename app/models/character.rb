@@ -24,6 +24,9 @@ class Character < ApplicationRecord
     end
   end
 
+  def available_spells
+  end
+
   #calculate all spell scores.
   def score_calc
     nuke_score = nuke_calc

@@ -1,0 +1,8 @@
+@spells.map do |spell|
+  {
+    id: spell.id,
+    name: spell.name,
+    description: spell.description,
+    character_classes: spell.character_classes,
+  }
+end

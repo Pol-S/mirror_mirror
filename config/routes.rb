@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
     delete "/characters/:id" => "characters#destroy"
 
+    get "/spells" => "spells#index"
+
     patch "/characters/:id/:spell_id" => "characters#add_spell"
     delete "/characters/:id/:spell_id" => "characters#destroy_spell"
   end
