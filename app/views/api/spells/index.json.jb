@@ -4,5 +4,6 @@
     name: spell.name,
     description: spell.description,
     character_classes: spell.character_classes,
+    characters: spell.characters,
   }
 end
