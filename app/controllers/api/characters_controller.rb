@@ -7,7 +7,6 @@ class Api::CharactersController < ApplicationController
   def show
     id = params["id"]
     @character = Character.find_by(id: params[:id])
-    @character.nuke_calc
     render "show.json.jb"
   end
 
@@ -32,7 +31,6 @@ class Api::CharactersController < ApplicationController
       render "show.json.jb"
     else
       render json: { message: "Character not saved" }
-      # render json: { errors: @character.errors.full_message }, status: :unprocessable_entity
     end
   end
 
